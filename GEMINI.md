@@ -9,6 +9,7 @@ This project is a high-end web portfolio for an architecture studio (**Despacho 
 - **Language**: TypeScript / HTML / CSS / Markdown
 - **Assets & Media**: Optimized responsive images (WebP/AVIF), vector graphics for architectural drawings/plans
 - **Version Control**: Git + GitHub
+-**Static Web**: it will be an static web, it don't have a backend.
 
 ## 3. Directory Structure
 ```text

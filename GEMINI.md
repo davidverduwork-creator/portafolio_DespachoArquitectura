@@ -16,6 +16,7 @@ portafolio_DespachoArquitectura/
 ├── .agents/
 │   └── rules/
 │       ├── architect.md        # Software Architect role definition & Phase 1 constraints
+│       ├── developer.md        # Software Developer role (Pure implementation led by Architect)
 │       └── qa.md               # QA & Auditor role definition & auditing guidelines
 ├── Assets/                     # Raw design assets, blueprints, studio photos
 ├── public/                     # Static public assets (fonts, icons, robots.txt)
@@ -39,20 +40,31 @@ portafolio_DespachoArquitectura/
 Project development is governed by specialized roles defined in `.agents/rules/`:
 
 1. **Software Architect** (`.agents/rules/architect.md`):
-   - Responsible for system design, content modeling, component hierarchy, performance budgeting, and technical specifications.
-   - **STRICT RULE**: In Phase 1, the architect **does not write application code**. The focus is strictly on architectural planning and technical validation.
+   - Responsible for system design, technical strategy, content modeling, component hierarchy, performance budgeting, and overall technical leadership.
+   - **STRICT RULE**: In Phase 1, the architect **does not write application code**. Focus is strictly on architectural planning and technical validation.
 
-2. **Quality Auditor / QA** (`.agents/rules/qa.md`):
+2. **Software Developer / Implementation Engineer** (`.agents/rules/developer.md`):
+   - Responsible for pure development and implementation of application code (Astro components, layouts, pages, styles, and logic).
+   - **ARCHITECT-LED DIRECTIVE**: Operates strictly under the technical direction and leadership of the Software Architect. Implements only architectural blueprints, schemas, and specifications approved by the architect and user.
+   - Executes during **Phase 3: Implementation**.
+
+3. **Quality Auditor / QA** (`.agents/rules/qa.md`):
    - Responsible for auditing, quality control, accessibility (WCAG AA), Core Web Vitals, and structural integrity.
    - **STRICT RULE**: Operates strictly as an **Auditor**; identifies defects, benchmarks quality, and enforces standards without writing implementation code.
 
-## 5. Development Phases
+## 5. Technical Philosophy & Native-First Policy
+- **Native-First Preference**: Always choose and prioritize native web standards (semantic HTML5, modern CSS, standard Web APIs, vanilla TypeScript) and native framework features (Astro built-ins, Islands Architecture, Content Collections, View Transitions, core Tailwind utility classes) over external third-party libraries.
+- **Strict Policy on External Libraries**:
+  - External libraries, npm packages, or plugins are **strictly restricted**. They may only be evaluated when a requested specification genuinely requires functionality that extends beyond what the native language, Web APIs, or framework provides.
+  - **MANDATORY APPROVAL RULE**: You must **ALWAYS ASK FOR PERMISSION AND CONFIRMATION** before installing, adding, or configuring any external library. Clearly explain why the native or framework solution is insufficient, provide details on the proposed library, its bundle weight, and alternatives before requesting user approval.
+
+## 6. Development Phases
 - **Phase 1: Architecture & Technical Planning** (Current Phase)
   - Define folder structure, rules, technical guidelines, and content schemas.
   - No application code written during this phase.
 - **Phase 2: Design System & Information Architecture**
   - Define typography scales, color palettes, spacing systems, and page mockups/wireframes.
 - **Phase 3: Implementation**
-  - Astro project setup, component build, styling with Tailwind CSS, and content integration.
+  - Astro project setup, component build, styling with Tailwind CSS, and content integration (executed by Software Developer under Architect guidance).
 - **Phase 4: QA, Audit & Deployment**
   - Performance audits, responsive testing, accessibility compliance, and production deployment.

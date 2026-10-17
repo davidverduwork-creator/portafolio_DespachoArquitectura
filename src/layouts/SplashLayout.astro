@@ -1,0 +1,53 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'LINDE Sur — Architect Studio | Arquitectura Contemporánea',
+  description = 'Estudio de arquitectura residencial contemporánea, paisajismo y dirección de proyectos. Jaén · Madrid · Costa de la Luz.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="h-full bg-surface-dark text-surface-neutral antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/logo/whiteLogo.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/HeroSectionHouseImage.png" />
+
+    <!-- Preload primary font -->
+    <link
+      rel="preload"
+      href="/fonts/BodoniModaSC-Variable.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Inter-Variable.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <ClientRouter />
+  </head>
+  <body class="h-full w-full overflow-hidden bg-surface-dark select-none">
+    <slot />
+  </body>
+</html>

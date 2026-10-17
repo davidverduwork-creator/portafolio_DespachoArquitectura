@@ -1,0 +1,152 @@
+---
+import SplashLayout from '../layouts/SplashLayout.astro';
+import ScrollIndicator from '../components/common/ScrollIndicator.astro';
+---
+
+<SplashLayout title="LINDE Sur — Architect Studio">
+  <main
+    id="splash-container"
+    class="relative h-[100dvh] w-full flex flex-col justify-between p-8 sm:p-14 lg:p-20 overflow-hidden cursor-pointer"
+  >
+    <!-- Background Hero Photograph with subtle zoom effect -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <img
+        src="/images/HeroSectionHouseImage.png"
+        alt="Arquitectura residencial contemporánea por LINDE Sur"
+        class="w-full h-full object-cover object-center transform scale-100 transition-transform duration-[2500ms] ease-out will-change-transform"
+        id="splash-bg"
+      />
+      <!-- Atmospheric Dark Vignette Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-surface-dark/90 via-surface-dark/45 to-surface-dark/60"></div>
+    </div>
+
+    <!-- Top Bar: Minimal Studio Tag -->
+    <header class="relative z-10 flex items-center justify-between w-full">
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-accent-secondary animate-pulse"></span>
+        <span class="font-sans text-[11px] uppercase tracking-ultra text-surface-neutral/80 font-light">
+          Jaén · Madrid · Costa de la Luz
+        </span>
+      </div>
+      <a
+        href="/home"
+        class="font-sans text-[11px] uppercase tracking-ultra text-surface-neutral/80 hover:text-accent-secondary transition-colors duration-300 hidden sm:inline-block"
+      >
+        Entrar Directamente →
+      </a>
+    </header>
+
+    <!-- Center/Bottom: Monumental Brand Identity -->
+    <div class="relative z-10 max-w-4xl my-auto sm:my-0 sm:mb-12">
+      <!-- SVG Brand Logotype -->
+      <div class="mb-6">
+        <img
+          src="/logo/whiteLogo.svg"
+          alt="LINDE Sur Architect Studio"
+          class="h-14 sm:h-20 lg:h-24 w-auto object-contain drop-shadow-md"
+          width="400"
+          height="145"
+        />
+      </div>
+
+      <!-- Tagline / Editorial Statement -->
+      <p class="font-sans text-surface-neutral/90 text-sm sm:text-base lg:text-lg font-light tracking-wide max-w-xl leading-relaxed">
+        La arquitectura concebida como materia, proporción y luz. Integración silenciosa con el paisaje natural.
+      </p>
+
+      <!-- Mobile quick enter button -->
+      <div class="mt-8 sm:hidden">
+        <a
+          href="/home"
+          class="inline-flex items-center gap-3 px-6 py-3 border border-surface-neutral/40 text-surface-neutral text-xs font-sans uppercase tracking-widest bg-surface-dark/40 backdrop-blur-md"
+        >
+          <span>Acceder al estudio</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom Center: Animated Scroll to Discover Indicator -->
+    <footer class="relative z-10 flex justify-center w-full">
+      <ScrollIndicator href="/home" text="DESLIZA PARA DESCUBRIR" />
+    </footer>
+  </main>
+</SplashLayout>
+
+<script>
+  // Native View Transition trigger on First Scroll or Wheel / Touch
+  function initSplashTransition() {
+    const splash = document.getElementById('splash-container');
+    const bg = document.getElementById('splash-bg');
+    if (!splash) return;
+
+    let navigated = false;
+
+    function goToHome() {
+      if (navigated) return;
+      navigated = true;
+
+      // Animate background slightly on leave
+      if (bg) {
+        bg.style.transform = 'scale(1.06)';
+        bg.style.transition = 'transform 0.8s ease-in-out';
+      }
+
+      // Check if Astro transitions API is present
+      if ('navigate' in window && typeof (window as any).navigate === 'function') {
+        (window as any).navigate('/home');
+      } else {
+        window.location.href = '/home';
+      }
+    }
+
+    // Trigger on wheel down
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (e.deltaY > 20) {
+          goToHome();
+        }
+      },
+      { passive: true }
+    );
+
+    // Trigger on touch swipe up
+    let touchStartY = 0;
+    window.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchend',
+      (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchStartY - touchEndY > 50) {
+          goToHome();
+        }
+      },
+      { passive: true }
+    );
+
+    // Trigger on ArrowDown or Space key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+        goToHome();
+      }
+    });
+
+    // Also trigger on clicking empty background
+    splash.addEventListener('click', (e) => {
+      // Don't intercept anchor clicks
+      if ((e.target as HTMLElement).closest('a')) return;
+      goToHome();
+    });
+  }
+
+  initSplashTransition();
+  document.addEventListener('astro:page-load', initSplashTransition);
+</script>

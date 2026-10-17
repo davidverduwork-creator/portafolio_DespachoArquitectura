@@ -1,0 +1,262 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/common/SectionHeader.astro';
+import ProjectCard from '../components/portfolio/ProjectCard.astro';
+import ServiceModule from '../components/portfolio/ServiceModule.astro';
+import ProcessTimeline from '../components/portfolio/ProcessTimeline.astro';
+import Button from '../components/common/Button.astro';
+
+// Fetch all projects sorted by order
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="LINDE Sur — Architect Studio | Estudio de Arquitectura"
+  description="Arquitectura residencial contemporánea, paisajismo y dirección técnica de obra. Integración con el entorno natural, volumen y luz."
+>
+  <!-- HERO BANNER / INTRODUCTION -->
+  <section class="pt-36 sm:pt-44 pb-20 sm:pb-28 px-6 sm:px-10 lg:px-16 border-b border-accent-secondary/20 bg-surface-neutral">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-3 text-accent-primary font-sans text-xs uppercase tracking-ultra mb-6">
+        <span class="w-2 h-2 rounded-full bg-accent-primary"></span>
+        <span>Estudio de Arquitectura · Edición 2025</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+        <div class="lg:col-span-8">
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif text-surface-dark font-normal leading-[1.08] tracking-tight">
+            Arquitectura que habita el paisaje y dialoga con la luz.
+          </h1>
+        </div>
+        <div class="lg:col-span-4 pb-2">
+          <p class="font-sans text-slate-muted text-sm sm:text-base font-light leading-relaxed mb-6">
+            Concebimos proyectos donde la materia bruta, la orientación bioclimática y la proporción matemática se funden con la naturaleza.
+          </p>
+          <div class="flex items-center gap-4">
+            <Button href="#proyectos" variant="primary">Explorar Proyectos</Button>
+            <Button href="#estudio" variant="text">El Manifiesto</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: MANIFESTO / ABOUT THE STUDIO -->
+  <section id="estudio" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-surface-light border-b border-accent-secondary/20">
+    <div class="max-w-7xl mx-auto">
+      <SectionHeader
+        number="01"
+        category="MANIFIESTO & FILOSOFÍA"
+        title="La materia como respuesta al lugar"
+        subtitle="No imponemos formas sobre el terreno; permitimos que las preexistencias topográficas, la luz solar y la piedra del lugar dicten las líneas del espacio."
+        class="mb-16 sm:mb-20"
+      />
+
+      <!-- Editorial Grid: Quote + Story + Large Context Image -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Left: Text and Pillars (6 cols) -->
+        <div class="lg:col-span-6 flex flex-col gap-8 reveal-on-scroll">
+          <blockquote class="font-serif text-2xl sm:text-3xl text-surface-dark font-normal leading-snug pl-6 border-l-2 border-accent-primary italic">
+            «La arquitectura no es el arte de construir volúmenes, sino la disciplina de moldear el vacío para que la vida ocurra con serenidad.»
+          </blockquote>
+
+          <div class="space-y-4 font-sans text-slate-muted text-sm sm:text-base font-light leading-relaxed">
+            <p>
+              Fundado con vocación artesanal y rigor contemporáneo, **LINDE Sur** desarrolla obras residenciales y de integración paisajística en todo el arco sur peninsular y Madrid. 
+            </p>
+            <p>
+              Rechazamos las soluciones genéricas y la sobreproducción ornamental. Cada vivienda es un prototipo único, resuelto mediante sistemas pasivos de confort térmico, ventilación cruzada y materiales de nula toxicidad.
+            </p>
+          </div>
+
+          <!-- Studio Metrics -->
+          <div class="grid grid-cols-3 gap-6 pt-6 border-t border-accent-secondary/20">
+            <div>
+              <p class="font-serif text-3xl sm:text-4xl text-accent-primary font-normal">15+</p>
+              <p class="font-sans text-[11px] uppercase tracking-widest text-slate-muted mt-1 font-light">Años de Oficio</p>
+            </div>
+            <div>
+              <p class="font-serif text-3xl sm:text-4xl text-accent-primary font-normal">100%</p>
+              <p class="font-sans text-[11px] uppercase tracking-widest text-slate-muted mt-1 font-light">A Medida</p>
+            </div>
+            <div>
+              <p class="font-serif text-3xl sm:text-4xl text-accent-primary font-normal">A+</p>
+              <p class="font-sans text-[11px] uppercase tracking-widest text-slate-muted mt-1 font-light">Eficiencia</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Context Image (6 cols) -->
+        <div class="lg:col-span-6 reveal-on-scroll delay-200">
+          <div class="relative overflow-hidden aspect-[4/3] bg-surface-dark/5 shadow-md border border-accent-secondary/20">
+            <img
+              src="/images/upscalemedia-transformed.jpeg"
+              alt="Materia, texturas y arquitectura por LINDE Sur"
+              class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+            />
+            <div class="absolute bottom-4 left-4 right-4 p-4 bg-surface-neutral/90 backdrop-blur-md border border-accent-secondary/20 flex items-center justify-between">
+              <span class="font-sans text-xs uppercase tracking-widest text-surface-dark font-medium">Texturas & Atmósfera</span>
+              <span class="font-sans text-[10px] uppercase tracking-widest text-accent-primary">Estudio LINDE Sur</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: FEATURED PROJECTS -->
+  <section id="proyectos" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-surface-neutral border-b border-accent-secondary/20">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20">
+        <SectionHeader
+          number="02"
+          category="OBRAS SELECCIONADAS"
+          title="Proyectos destacados"
+          subtitle="Una selección de intervenciones arquitectónicas singulares donde la naturaleza y la técnica conviven en equilibrio."
+        />
+        <div class="shrink-0 hidden md:block">
+          <span class="font-sans text-xs text-slate-muted uppercase tracking-widest font-light">
+            3 Obras Documentadas
+          </span>
+        </div>
+      </div>
+
+      <!-- Asymmetric Editorial Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Project 1: Large featured banner card (Full 12 cols) */}
+        {sortedProjects[0] && (
+          <div class="lg:col-span-12">
+            <ProjectCard
+              title={sortedProjects[0].data.title}
+              tagline={sortedProjects[0].data.tagline}
+              category={sortedProjects[0].data.category}
+              location={sortedProjects[0].data.location}
+              year={sortedProjects[0].data.year}
+              surfaceArea={sortedProjects[0].data.surfaceArea}
+              coverImage={sortedProjects[0].data.coverImage}
+              coverAlt={sortedProjects[0].data.coverAlt}
+              aspect="landscape"
+            />
+          </div>
+        )}
+
+        {/* Project 2: Landscape card (7 cols) */}
+        {sortedProjects[1] && (
+          <div class="lg:col-span-7">
+            <ProjectCard
+              title={sortedProjects[1].data.title}
+              tagline={sortedProjects[1].data.tagline}
+              category={sortedProjects[1].data.category}
+              location={sortedProjects[1].data.location}
+              year={sortedProjects[1].data.year}
+              surfaceArea={sortedProjects[1].data.surfaceArea}
+              coverImage={sortedProjects[1].data.coverImage}
+              coverAlt={sortedProjects[1].data.coverAlt}
+              aspect="landscape"
+            />
+          </div>
+        )}
+
+        {/* Project 3: Vertical portrait card (5 cols) */}
+        {sortedProjects[2] && (
+          <div class="lg:col-span-5">
+            <ProjectCard
+              title={sortedProjects[2].data.title}
+              tagline={sortedProjects[2].data.tagline}
+              category={sortedProjects[2].data.category}
+              location={sortedProjects[2].data.location}
+              year={sortedProjects[2].data.year}
+              surfaceArea={sortedProjects[2].data.surfaceArea}
+              coverImage={sortedProjects[2].data.coverImage}
+              coverAlt={sortedProjects[2].data.coverAlt}
+              aspect="portrait"
+            />
+          </div>
+        )}
+      </div>
+
+      <!-- Detail Accents / Material Gallery -->
+      <div class="mt-20 pt-16 border-t border-accent-secondary/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+        <div class="reveal-on-scroll">
+          <p class="font-sans text-xs uppercase tracking-ultra text-accent-primary mb-2">Detalle & Oficio</p>
+          <h4 class="font-serif text-xl text-surface-dark">La precisión del encuentro</h4>
+          <p class="font-sans text-xs text-slate-muted mt-2 font-light leading-relaxed">
+            Cada unión entre hormigón, madera y vidrio es ejecutada con tolerancias milimétricas.
+          </p>
+        </div>
+        <div class="overflow-hidden aspect-square border border-accent-secondary/20 shadow-sm reveal-on-scroll delay-100">
+          <img src="/images/detalles2.png" alt="Detalle constructivo de fachada" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+        </div>
+        <div class="overflow-hidden aspect-square border border-accent-secondary/20 shadow-sm reveal-on-scroll delay-200">
+          <img src="/images/detalles3.png" alt="Detalle de carpintería y sombra" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+        </div>
+        <div class="p-6 bg-surface-light border border-accent-secondary/20 flex flex-col justify-between aspect-square reveal-on-scroll delay-300">
+          <span class="font-serif text-2xl text-accent-secondary">04</span>
+          <p class="font-serif text-base text-surface-dark">«El detalle no es un añadido, es la esencia que valida el todo.»</p>
+          <span class="font-sans text-[10px] uppercase tracking-widest text-slate-muted">LINDE Sur Arch</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SERVICES -->
+  <section id="servicios" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-surface-light border-b border-accent-secondary/20">
+    <div class="max-w-7xl mx-auto">
+      <SectionHeader
+        number="03"
+        category="ÁREAS DE ESPECIALIZACIÓN"
+        title="Servicios arquitectónicos integrales"
+        subtitle="Acompañamos al cliente desde la elección de la parcela y los primeros bocetos hasta la última entrega de llaves y el interiorismo."
+        class="mb-16 sm:mb-20"
+      />
+
+      <ServiceModule />
+    </div>
+  </section>
+
+  <!-- SECTION 4: METHODOLOGY & PROCESS -->
+  <section id="proceso" class="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-surface-neutral border-b border-accent-secondary/20">
+    <div class="max-w-7xl mx-auto">
+      <SectionHeader
+        number="04"
+        category="MÉTODO DE TRABAJO"
+        title="Del concepto a la construcción"
+        subtitle="Un proceso lineal y transparente que garantiza fidelidad formal, control presupuestario y tranquilidad durante toda la ejecución."
+        class="mb-16 sm:mb-20"
+      />
+
+      <ProcessTimeline />
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION BANNER -->
+  <section class="py-24 px-6 sm:px-10 lg:px-16 bg-accent-primary text-surface-neutral relative overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center flex flex-col items-center gap-6 relative z-10 reveal-on-scroll">
+      <span class="font-sans text-xs uppercase tracking-ultra text-surface-neutral/80 font-light">
+        Comienza Tu Proyecto
+      </span>
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal text-surface-neutral leading-tight max-w-3xl">
+        ¿Hablamos sobre tu próxima arquitectura?
+      </h2>
+      <p class="font-sans text-surface-neutral/80 text-sm sm:text-base max-w-xl font-light leading-relaxed">
+        Estudiamos cada propuesta de forma personalizada. Cuéntanos tu idea, el terreno que imaginas o la reforma que deseas emprender.
+      </p>
+      <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="mailto:estudio@lindesur.com?subject=Consulta%20de%20Proyecto%20-%20LINDE%20Sur"
+          class="px-8 py-3.5 bg-surface-dark text-surface-neutral text-xs font-sans uppercase tracking-widest hover:bg-surface-neutral hover:text-surface-dark transition-all duration-300 shadow-sm"
+        >
+          Escribir al Estudio
+        </a>
+        <a
+          href="tel:+34953221040"
+          class="px-8 py-3.5 border border-surface-neutral/40 text-surface-neutral text-xs font-sans uppercase tracking-widest hover:border-surface-neutral transition-all duration-300"
+        >
+          Llamar Directamente
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

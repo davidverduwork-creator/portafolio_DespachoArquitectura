@@ -1,0 +1,37 @@
+---
+interface Props {
+  number: string; // e.g. "01", "02"
+  category: string; // e.g. "ESTUDIO", "PROYECTOS SELECCIONADOS"
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  number,
+  category,
+  title,
+  subtitle,
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+
+const alignmentClasses = align === 'center' ? 'items-center text-center' : 'items-start text-left';
+---
+
+<header class={`flex flex-col ${alignmentClasses} gap-3 reveal-on-scroll ${className}`}>
+  <div class="flex items-center gap-3 text-accent-primary font-sans text-xs uppercase tracking-ultra">
+    <span class="font-medium">{number}</span>
+    <span class="w-8 h-[1px] bg-accent-secondary/60"></span>
+    <span class="text-slate-muted">{category}</span>
+  </div>
+  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-surface-dark leading-tight">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="font-sans text-slate-muted text-base sm:text-lg max-w-2xl leading-relaxed mt-2 font-light">
+      {subtitle}
+    </p>
+  )}
+</header>

@@ -1,0 +1,72 @@
+---
+interface Step {
+  phase: string;
+  number: string;
+  title: string;
+  description: string;
+}
+
+const steps: Step[] = [
+  {
+    phase: 'Fase 01',
+    number: '01',
+    title: 'Diálogo & Análisis de Lugar',
+    description:
+      'Estudio exhaustivo de la topografía, vientos dominantes, asoleamiento y vegetación existente. Conversación profunda con el cliente para comprender su ritmo de vida y aspiraciones espaciales.',
+  },
+  {
+    phase: 'Fase 02',
+    number: '02',
+    title: 'Concepto & Anteproyecto 3D',
+    description:
+      'Primeros croquis a mano alzada y volumetrías digitales. Exploración formal de la luz y los vacíos, complementada con renders hiperrealistas para experimentar el espacio antes de construir.',
+  },
+  {
+    phase: 'Fase 03',
+    number: '03',
+    title: 'Proyecto de Ejecución & Detalle',
+    description:
+      'Definición milimétrica de cada encuentro constructivo, planos de instalaciones de alta eficiencia y cálculo estructural. Selección in situ de materiales de cantera y maderas nobles.',
+  },
+  {
+    phase: 'Fase 04',
+    number: '04',
+    title: 'Dirección Rigurosa & Entrega',
+    description:
+      'Supervisión continua a pie de obra. Cuidado artesanal de los acabados y coordinación técnica de gremios hasta la entrega de llaves y el primer encendido de la casa.',
+  },
+];
+---
+
+<div class="relative">
+  <!-- Horizontal connector line for desktop -->
+  <div class="hidden lg:block absolute top-[44px] left-0 right-0 h-[1px] bg-accent-secondary/30 z-0"></div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10">
+    {
+      steps.map((step, index) => (
+        <div class={`flex flex-col reveal-on-scroll delay-${(index + 1) * 100}`}>
+          <!-- Step indicator with node -->
+          <div class="flex items-center gap-4 mb-6">
+            <span class="w-10 h-10 rounded-full border border-accent-secondary bg-surface-neutral flex items-center justify-center font-serif text-sm font-medium text-accent-primary shadow-sm shrink-0">
+              {step.number}
+            </span>
+            <span class="font-sans text-[11px] uppercase tracking-widest text-slate-muted font-medium">
+              {step.phase}
+            </span>
+          </div>
+
+          <!-- Step title -->
+          <h4 class="text-xl font-serif text-surface-dark mb-3">
+            {step.title}
+          </h4>
+
+          <!-- Step description -->
+          <p class="font-sans text-slate-muted text-xs sm:text-sm font-light leading-relaxed">
+            {step.description}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  class: className = '',
+  type = 'button',
+  target,
+  rel,
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center font-sans text-xs uppercase tracking-widest transition-all duration-300 group';
+
+const variantStyles = {
+  primary: 'px-8 py-3.5 bg-accent-primary text-surface-neutral hover:bg-accent-secondary hover:shadow-sm',
+  secondary: 'px-8 py-3.5 bg-surface-dark text-surface-neutral hover:bg-accent-primary',
+  outline: 'px-8 py-3.5 border border-surface-dark/20 text-surface-dark hover:border-accent-primary hover:text-accent-primary',
+  text: 'py-1 text-surface-dark hover:text-accent-primary relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-110',
+};
+
+const combinedClasses = `${baseStyles} ${variantStyles[variant]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={combinedClasses} target={target} rel={rel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={combinedClasses}>
+      <slot />
+    </button>
+  )
+}

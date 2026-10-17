@@ -1,0 +1,79 @@
+---
+interface ServiceItem {
+  number: string;
+  title: string;
+  description: string;
+  features: string[];
+}
+
+const services: ServiceItem[] = [
+  {
+    number: '01',
+    title: 'Diseño Residencial & Villas Exclusivas',
+    description:
+      'Proyectos residenciales de obra nueva y reformas integrales de alto valor. Diseñamos espacios donde la luz natural, la orientación bioclimática y la pureza volumétrica son los pilares fundamentales.',
+    features: ['Viviendas unifamiliares singulares', 'Arquitectura pasiva y sostenible', 'Modelado BIM y renderizado hiperrealista'],
+  },
+  {
+    number: '02',
+    title: 'Arquitectura del Paisaje & Urbanismo',
+    description:
+      'Inspirados en la comunión entre el entorno vegetal y la materia construida. Creamos transiciones fluidas donde el jardín y la topografía dialogan indisolublemente con los volúmenes arquitectónicos.',
+    features: ['Integración paisajística de parcelas', 'Patios interiores y láminas de agua', 'Selección botánica autóctona'],
+  },
+  {
+    number: '03',
+    title: 'Interiorismo & Paisajismo Interior',
+    description:
+      'Tratamiento de la piel interior del espacio. Selección milimétrica de materiales nobles (maderas naturales, cal, piedra local), iluminación técnica escenográfica y diseño de mobiliario a medida.',
+    features: ['Diseño de carpinterías y piezas a medida', 'Estudio lumínico arquitectónico', 'Materiales sostenibles de baja huella'],
+  },
+  {
+    number: '04',
+    title: 'Dirección de Obra & Project Management',
+    description:
+      'Control riguroso de cada fase de ejecución técnica, calidad de acabados, cumplimiento presupuestario y gestión integral de licencias administrativas ante organismos oficiales.',
+    features: ['Seguimiento exhaustivo de obra en tiempo real', 'Coordinación de gremios y especialistas', 'Certificaciones de eficiencia energética'],
+  },
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+  {
+    services.map((service, index) => (
+      <article
+        class={`group p-8 sm:p-10 bg-surface-light border border-accent-secondary/20 hover:border-accent-primary/50 transition-all duration-500 flex flex-col justify-between reveal-on-scroll delay-${(index + 1) * 100}`}
+      >
+        <div>
+          <!-- Header number & badge -->
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-accent-secondary/15">
+            <span class="font-serif text-3xl sm:text-4xl text-accent-secondary font-light group-hover:text-accent-primary transition-colors">
+              {service.number}
+            </span>
+            <span class="w-2.5 h-2.5 rounded-full bg-accent-secondary/40 group-hover:bg-accent-primary group-hover:scale-125 transition-all duration-300"></span>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-xl sm:text-2xl font-serif text-surface-dark mb-4 group-hover:text-accent-primary transition-colors duration-300">
+            {service.title}
+          </h3>
+
+          <!-- Description -->
+          <p class="font-sans text-slate-muted text-sm sm:text-base leading-relaxed font-light mb-6">
+            {service.description}
+          </p>
+        </div>
+
+        <!-- Capability Bullet Points -->
+        <ul class="pt-6 border-t border-accent-secondary/15 flex flex-col gap-2 font-sans text-xs text-surface-dark/80 font-light">
+          {service.features.map((feat) => (
+            <li class="flex items-center gap-2.5">
+              <span class="w-1.5 h-1.5 bg-accent-primary rounded-full shrink-0"></span>
+              <span>{feat}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "portafolio_despachoarquitectura",
+  "version": "1.0.0",
+  "description": "Sitio web y portafolio digital para LINDE Sur — Architect Studio",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidverduwork-creator/portafolio_DespachoArquitectura.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.18.2",
+    "tailwindcss": "^3.4.17"
+  }
+}

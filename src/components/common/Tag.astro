@@ -1,0 +1,21 @@
+---
+interface Props {
+  text: string;
+  variant?: 'light' | 'dark' | 'outline';
+  class?: string;
+}
+
+const { text, variant = 'outline', class: className = '' } = Astro.props;
+
+const variantStyles = {
+  outline: 'border border-accent-secondary/50 text-accent-primary bg-surface-neutral/60',
+  light: 'bg-surface-neutral text-surface-dark border border-surface-dark/10',
+  dark: 'bg-surface-dark text-surface-neutral border border-surface-neutral/20',
+};
+---
+
+<span
+  class={`inline-block font-sans text-[10px] sm:text-[11px] uppercase tracking-widest px-3 py-1 font-medium select-none ${variantStyles[variant]} ${className}`}
+>
+  {text}
+</span>
